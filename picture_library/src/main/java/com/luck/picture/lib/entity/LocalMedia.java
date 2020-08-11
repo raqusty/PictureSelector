@@ -148,6 +148,11 @@ public class LocalMedia implements Parcelable {
      */
     private boolean isMaxSelectEnabledMask;
 
+    /**
+     * 阅后即焚
+     */
+    private boolean isFire;
+
     public LocalMedia() {
 
     }
@@ -392,6 +397,13 @@ public class LocalMedia implements Parcelable {
         isMaxSelectEnabledMask = maxSelectEnabledMask;
     }
 
+    public boolean isFire() {
+        return isFire;
+    }
+
+    public void setFire(boolean fire) {
+        isFire = fire;
+    }
 
     @Override
     public int describeContents() {
@@ -426,6 +438,7 @@ public class LocalMedia implements Parcelable {
         dest.writeByte(this.isLongImage ? (byte) 1 : (byte) 0);
         dest.writeLong(this.bucketId);
         dest.writeByte(this.isMaxSelectEnabledMask ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isFire ? (byte) 1 : (byte) 0);
     }
 
     protected LocalMedia(Parcel in) {
@@ -455,6 +468,7 @@ public class LocalMedia implements Parcelable {
         this.isLongImage = in.readByte() != 0;
         this.bucketId = in.readLong();
         this.isMaxSelectEnabledMask = in.readByte() != 0;
+        this.isFire = in.readByte() != 0;
     }
 
     public static final Creator<LocalMedia> CREATOR = new Creator<LocalMedia>() {

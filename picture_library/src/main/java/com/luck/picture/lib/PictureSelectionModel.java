@@ -113,6 +113,10 @@ public class PictureSelectionModel {
         return this;
     }
 
+    public PictureSelectionModel isFire(Boolean isFire) {
+        selectionConfig.isFire = isFire;
+        return this;
+    }
     /**
      * Only for Android version Q
      *
@@ -1396,4 +1400,6 @@ public class PictureSelectionModel {
             throw new NullPointerException("This PictureSelector is Null");
         }
     }
+
+
 }

@@ -427,6 +427,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .imageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
                         .theme(themeId)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style v2.3.3后 建议使用setPictureStyle()动态方式
                         .isWeChatStyle(isWeChatStyle)// 是否开启微信图片选择风格
+                        .isFire(true)
                         .isUseCustomCamera(cb_custom_camera.isChecked())// 是否使用自定义相机
                         .setLanguage(language)// 设置语言，默认中文
                         .isPageStrategy(cbPage.isChecked())// 是否开启分页策略 & 每页多少条；默认开启
@@ -588,6 +589,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.i(TAG, "Android Q 特有Path:" + media.getAndroidQToPath());
                 Log.i(TAG, "宽高: " + media.getWidth() + "x" + media.getHeight());
                 Log.i(TAG, "Size: " + media.getSize());
+                Log.i(TAG, "fire: " + media.isFire());
                 // TODO 可以通过PictureSelectorExternalUtils.getExifInterface();方法获取一些额外的资源信息，如旋转角度、经纬度等信息
             }
             if (mAdapterWeakReference.get() != null) {
@@ -706,6 +708,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Log.i(TAG, "Android Q 特有Path:" + media.getAndroidQToPath());
                         Log.i(TAG, "宽高: " + media.getWidth() + "x" + media.getHeight());
                         Log.i(TAG, "Size: " + media.getSize());
+                        Log.i(TAG, "fire: " + media.isFire());
 
                         // TODO 可以通过PictureSelectorExternalUtils.getExifInterface();方法获取一些额外的资源信息，如旋转角度、经纬度等信息
                     }

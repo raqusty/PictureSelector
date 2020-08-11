@@ -66,4 +66,26 @@
         android:textColor="@color/picture_color_white"
         android:textSize="11sp"
         android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/fire_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:background="?attr/picture.fire.checked.style"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="12sp" />
+
+    <View
+        android:id="@+id/btn_fire_check"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:background="@color/picture_color_transparent" />
+
 </com.luck.picture.lib.widget.SquareRelativeLayout>

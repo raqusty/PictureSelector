@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -222,6 +223,10 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
                     MediaUtils.setOrientationAsynchronous(context, image, config.isAndroidQChangeWH, config.isAndroidQChangeVideoWH, null);
                     changeCheckboxState(contentHolder, image);
                 });
+
+                contentHolder. btnFireCheck.setOnClickListener(v -> {
+                    changeCheckFireBoxState(contentHolder,image);
+                });
             }
             contentHolder.contentView.setOnClickListener(v -> {
                 if (config.isMaxSelectEnabledMask) {
@@ -347,9 +352,10 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivPicture;
         TextView tvCheck;
+        TextView fireCheck;
         TextView tvDuration, tvIsGif, tvLongChart;
         View contentView;
-        View btnCheck;
+        View btnCheck,btnFireCheck;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -360,6 +366,8 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
             tvDuration = itemView.findViewById(R.id.tv_duration);
             tvIsGif = itemView.findViewById(R.id.tv_isGif);
             tvLongChart = itemView.findViewById(R.id.tv_long_chart);
+            fireCheck = itemView.findViewById(R.id.fire_check);
+            btnFireCheck = itemView.findViewById(R.id.btn_fire_check);
             if (config.style != null) {
                 if (config.style.pictureCheckedStyle != 0) {
                     tvCheck.setBackgroundResource(config.style.pictureCheckedStyle);
@@ -512,6 +520,10 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
                     break;
                 }
             }
+            if (config.isFire){
+                contentHolder.fireCheck.setVisibility(View.GONE);
+                contentHolder. btnFireCheck.setVisibility(View.GONE);
+            }
         } else {
             // The radio
             if (config.selectionMode == PictureConfig.SINGLE) {
@@ -552,6 +564,11 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
             VoiceUtils.getInstance().play();
             AnimUtils.zoom(contentHolder.ivPicture, config.zoomAnim);
             contentHolder.tvCheck.startAnimation(AnimationUtils.loadAnimation(context, R.anim.picture_anim_modal_in));
+
+            if (config.isFire){
+                contentHolder.fireCheck.setVisibility(View.VISIBLE);
+                contentHolder. btnFireCheck.setVisibility(View.VISIBLE);
+            }
         }
 
         boolean isRefreshAll = false;
@@ -612,6 +629,12 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (imageSelectChangedListener != null) {
             imageSelectChangedListener.onChange(selectData);
         }
+    }
+
+    private void changeCheckFireBoxState(ViewHolder contentHolder, LocalMedia image) {
+        boolean isChecked = contentHolder.fireCheck.isSelected();
+        image.setFire(!isChecked);
+        contentHolder.fireCheck.setSelected(!isChecked);
     }
 
     /**

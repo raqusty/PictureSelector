@@ -21,6 +21,7 @@
     <attr name="picture.arrow_up.icon" format="reference" />
     <attr name="picture.num.style" format="reference" />
     <attr name="picture.checked.style" format="reference" />
+    <attr name="picture.fire.checked.style" format="reference" />
     <attr name="picture.bottom.bg" format="reference|color" />
     <attr name="picture.preview.textColor" format="reference|color" />
     <attr name="picture.complete.textColor" format="reference|color" />

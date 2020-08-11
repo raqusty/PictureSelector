@@ -102,6 +102,8 @@
         <item name="picture.crop.title.color">@color/picture_color_white</item>
         <!--相册文件夹列表选中图标-->
         <item name="picture.folder_checked_dot">@drawable/picture_orange_oval</item>
+        <!--阅后即焚勾选样式-->
+        <item name="picture.fire.checked.style">@drawable/picture_checkbox_selector</item>
     </style>
 
 
@@ -156,6 +158,8 @@
         <item name="picture.crop.title.color">@color/picture_color_white</item>
         <!--相册文件夹列表选中图标-->
         <item name="picture.folder_checked_dot">@drawable/picture_orange_oval</item>
+        <!--阅后即焚勾选样式-->
+        <item name="picture.fire.checked.style">@drawable/picture_checkbox_selector</item>
     </style>
 
     <style name="Picture.Theme.Translucent" parent="Base.Theme.NoActionBar">

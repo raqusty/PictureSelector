@@ -159,6 +159,9 @@ public final class PictureSelectionConfig implements Parcelable {
     public boolean isFallbackVersion2;
     public boolean isFallbackVersion3;
 
+    //阅后即焚 状态
+    public boolean isFire;
+
     protected void initDefaultValue() {
         chooseMode = PictureMimeType.ofImage();
         camera = false;
@@ -262,6 +265,7 @@ public final class PictureSelectionConfig implements Parcelable {
         isAndroidQChangeWH = true;
         isAndroidQChangeVideoWH = false;
         isQuickCapture = true;
+        isFire = false;
     }
 
     public static PictureSelectionConfig getInstance() {
@@ -403,6 +407,7 @@ public final class PictureSelectionConfig implements Parcelable {
         dest.writeByte(this.isFallbackVersion ? (byte) 1 : (byte) 0);
         dest.writeByte(this.isFallbackVersion2 ? (byte) 1 : (byte) 0);
         dest.writeByte(this.isFallbackVersion3 ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isFire ? (byte) 1 : (byte) 0);
     }
 
     protected PictureSelectionConfig(Parcel in) {
@@ -508,6 +513,7 @@ public final class PictureSelectionConfig implements Parcelable {
         this.isFallbackVersion = in.readByte() != 0;
         this.isFallbackVersion2 = in.readByte() != 0;
         this.isFallbackVersion3 = in.readByte() != 0;
+        this.isFire = in.readByte() != 0;
     }
 
     public static final Creator<PictureSelectionConfig> CREATOR = new Creator<PictureSelectionConfig>() {

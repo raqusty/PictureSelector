@@ -175,6 +175,20 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
                     dispatchHandleMask(contentHolder, image);
                 }
             }
+            //设置阅后即焚
+            if (config.isFire){
+                if (contentHolder.tvCheck.isSelected()){
+                    contentHolder.fireCheck.setVisibility(View.VISIBLE);
+                    contentHolder.btnFireCheck.setVisibility(View.VISIBLE);
+                    contentHolder.fireCheck.setSelected(image.isFire());
+                }else {
+                    contentHolder.fireCheck.setVisibility(View.GONE);
+                    contentHolder.btnFireCheck.setVisibility(View.GONE);
+                }
+            }else {
+                contentHolder.fireCheck.setVisibility(View.GONE);
+                contentHolder.btnFireCheck.setVisibility(View.GONE);
+            }
             contentHolder.tvIsGif.setVisibility(PictureMimeType.isGif(mimeType) ? View.VISIBLE : View.GONE);
             if (PictureMimeType.isHasImage(image.getMimeType())) {
                 if (image.loadLongImageStatus == PictureConfig.NORMAL) {
@@ -522,7 +536,8 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
             }
             if (config.isFire){
                 contentHolder.fireCheck.setVisibility(View.GONE);
-                contentHolder. btnFireCheck.setVisibility(View.GONE);
+                contentHolder.btnFireCheck.setVisibility(View.GONE);
+                image.setFire(false);
             }
         } else {
             // The radio

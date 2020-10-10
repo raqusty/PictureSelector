@@ -22,7 +22,6 @@
             android:id="@+id/picture_id_preview"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
             android:enabled="false"
             android:gravity="left|center"
             android:padding="12dp"

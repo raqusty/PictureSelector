@@ -36,4 +36,13 @@
     <color name="picture_color_half_white">#99FFFFFF</color>
     <color name="picture_color_ff572e">#ff572e</color>
     <color name="picture_color_529BeA">#529BeA</color>
+
+    <color name="f94d83">#F94D83</color>
+    <color name="f8fafd">#f8fafd</color>
+    <color name="c33f94d83">#33f94d83</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="c464646">#464646</color>
+    <color name="c66464646">#66464646</color>
+
 </resources>

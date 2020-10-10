@@ -178,4 +178,6 @@
         <item name="picture.fire.checked.style">@drawable/picture_checkbox_selector</item>
     </style>
 
+
+
 </resources>

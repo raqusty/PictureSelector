@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cb_custom_camera, cbPage, cbEnabledMask;
     private int themeId;
     private int chooseMode = PictureMimeType.ofAll();
-    private boolean isWeChatStyle;
+    private boolean isWeChatStyle = true;
     private boolean isUpward;
     private boolean needScaleBig = true;
     private boolean needScaleSmall = true;
@@ -835,9 +835,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mWindowAnimationStyle.ofAllAnimation(R.anim.picture_anim_up_in, R.anim.picture_anim_down_out);
                 break;
             case R.id.rb_default_style:
-                themeId = R.style.picture_default_style;
-                isWeChatStyle = false;
-                getDefaultStyle();
+                themeId = R.style.picture_my_style;
+                isWeChatStyle = true;
+//                getDefaultStyle();
                 break;
             case R.id.rb_white_style:
                 themeId = R.style.picture_white_style;

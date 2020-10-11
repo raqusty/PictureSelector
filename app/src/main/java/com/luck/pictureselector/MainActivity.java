@@ -837,7 +837,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.rb_default_style:
                 themeId = R.style.picture_my_style;
                 isWeChatStyle = true;
-//                getDefaultStyle();
+                getWeChatStyle();
                 break;
             case R.id.rb_white_style:
                 themeId = R.style.picture_white_style;

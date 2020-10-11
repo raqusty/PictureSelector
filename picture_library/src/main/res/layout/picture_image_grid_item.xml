@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
         android:background="?attr/picture.checked.style"
         android:gravity="center"
         android:textColor="@color/picture_color_white"
@@ -22,8 +22,8 @@
 
     <View
         android:id="@+id/btnCheck"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_alignParentRight="true"
         android:background="@color/picture_color_transparent" />
 
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
         android:background="?attr/picture.fire.checked.style"
         android:gravity="center"
         android:visibility="gone"
@@ -81,8 +81,8 @@
 
     <View
         android:id="@+id/btn_fire_check"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="35dp"
+        android:layout_height="345dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:visibility="gone"

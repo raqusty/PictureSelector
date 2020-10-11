@@ -192,7 +192,7 @@ public class PicturePreviewActivity extends PictureBaseActivity implements
                     mCbOriginal.setVisibility(isHasVideo ? View.GONE : View.VISIBLE);
                     mCbOriginal.setChecked(config.isCheckOriginalImage);
                 }
-                onPageSelectedChange(media);
+                onPageSelectedChange(position,media);
 
                 if (config.isPageStrategy && !isBottomPreview) {
                     if (isHasMore) {
@@ -311,7 +311,7 @@ public class PicturePreviewActivity extends PictureBaseActivity implements
      *
      * @param media
      */
-    protected void onPageSelectedChange(LocalMedia media) {
+    protected void onPageSelectedChange(int position,LocalMedia media) {
 
     }
 
@@ -584,7 +584,7 @@ public class PicturePreviewActivity extends PictureBaseActivity implements
         int id = view.getId();
         if (id == R.id.pictureLeftBack) {
             onBackPressed();
-        } else if (id == R.id.tv_ok || id == R.id.tvMediaNum) {
+        } else if (id == R.id.tv_ok || id == R.id.tvMediaNum || id == R.id.select_complete) {
             onComplete();
         } else if (id == R.id.btnCheck) {
             onCheckedComplete();

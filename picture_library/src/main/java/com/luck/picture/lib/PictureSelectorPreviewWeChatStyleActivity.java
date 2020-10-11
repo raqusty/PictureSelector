@@ -1,8 +1,10 @@
 package com.luck.picture.lib;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -27,39 +29,29 @@ public class PictureSelectorPreviewWeChatStyleActivity extends PicturePreviewAct
      * alpha duration
      */
     private final static int ALPHA_DURATION = 300;
-    private TextView mPictureSendView;
     private RecyclerView mRvGallery;
-    private TextView tvSelected;
     private View bottomLine;
     private PictureWeChatPreviewGalleryAdapter mGalleryAdapter;
+
+    private TextView mSelectNumText;
+    private ImageView mIsFireImage;
+    private TextView mIsFireText;
 
     @Override
     public int getResourceId() {
         return R.layout.picture_wechat_style_preview;
     }
 
-    private void goneParent() {
-        if (tvMediaNum.getVisibility() == View.VISIBLE) {
-            tvMediaNum.setVisibility(View.GONE);
-        }
-        if (mTvPictureOk.getVisibility() == View.VISIBLE) {
-            mTvPictureOk.setVisibility(View.GONE);
-        }
-        if (!TextUtils.isEmpty(check.getText())) {
-            check.setText("");
-        }
-    }
-
     @Override
     protected void initWidgets() {
         super.initWidgets();
-        goneParent();
         mRvGallery = findViewById(R.id.rv_gallery);
         bottomLine = findViewById(R.id.bottomLine);
-        tvSelected = findViewById(R.id.tv_selected);
-        mPictureSendView = findViewById(R.id.picture_send);
-        mPictureSendView.setOnClickListener(this);
-        mPictureSendView.setText(getString(R.string.picture_send));
+        mSelectNumText = findViewById(R.id.select_complete);
+        mIsFireImage = findViewById(R.id.is_fire_image);
+        mIsFireText = findViewById(R.id.is_fire_text);
+        mTvPictureOk.setOnClickListener(this);
+
         mCbOriginal.setTextSize(16);
         mGalleryAdapter = new PictureWeChatPreviewGalleryAdapter(config);
         WrapContentLinearLayoutManager layoutManager = new WrapContentLinearLayoutManager(getContext());
@@ -97,6 +89,24 @@ public class PictureSelectorPreviewWeChatStyleActivity extends PicturePreviewAct
                 }
             }
         }
+
+        mIsFireImage.setOnClickListener(v -> {
+            setFireItem();
+        });
+
+        mIsFireText.setOnClickListener(v -> {
+            setFireItem();
+        });
+
+    }
+
+    private void setFireItem(){
+        LocalMedia media = adapter.getItem(position);
+//        selectData.remove(media);
+        boolean isFire = !media.isFire();
+        media.setFire(isFire);
+
+        mIsFireImage.setSelected(isFire);
     }
 
     /**
@@ -117,71 +127,6 @@ public class PictureSelectorPreviewWeChatStyleActivity extends PicturePreviewAct
     @Override
     public void initPictureSelectorStyle() {
         super.initPictureSelectorStyle();
-        if (config.style != null) {
-            if (config.style.pictureCompleteBackgroundStyle != 0) {
-                mPictureSendView.setBackgroundResource(config.style.pictureCompleteBackgroundStyle);
-            } else {
-                mPictureSendView.setBackgroundResource(R.drawable.picture_send_button_bg);
-            }
-            if (config.style.pictureRightTextSize != 0) {
-                mPictureSendView.setTextSize(config.style.pictureRightTextSize);
-            }
-            if (!TextUtils.isEmpty(config.style.pictureWeChatPreviewSelectedText)) {
-                tvSelected.setText(config.style.pictureWeChatPreviewSelectedText);
-            }
-            if (config.style.pictureWeChatPreviewSelectedTextSize != 0) {
-                tvSelected.setTextSize(config.style.pictureWeChatPreviewSelectedTextSize);
-            }
-            if (config.style.picturePreviewBottomBgColor != 0) {
-                selectBarLayout.setBackgroundColor(config.style.picturePreviewBottomBgColor);
-            } else {
-                selectBarLayout.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.picture_color_half_grey));
-            }
-            if (config.style.pictureCompleteTextColor != 0) {
-                mPictureSendView.setTextColor(config.style.pictureCompleteTextColor);
-            } else {
-                if (config.style.pictureCancelTextColor != 0) {
-                    mPictureSendView.setTextColor(config.style.pictureCancelTextColor);
-                } else {
-                    mPictureSendView.setTextColor(ContextCompat.getColor(getContext(), R.color.picture_color_white));
-                }
-            }
-            if (config.style.pictureOriginalFontColor == 0) {
-                mCbOriginal.setTextColor(ContextCompat
-                        .getColor(this, R.color.picture_color_white));
-            }
-            if (config.style.pictureWeChatChooseStyle != 0) {
-                check.setBackgroundResource(config.style.pictureWeChatChooseStyle);
-            } else {
-                check.setBackgroundResource(R.drawable.picture_wechat_select_cb);
-            }
-            if (config.isOriginalControl) {
-                if (config.style.pictureOriginalControlStyle == 0) {
-                    mCbOriginal.setButtonDrawable(ContextCompat
-                            .getDrawable(this, R.drawable.picture_original_wechat_checkbox));
-                }
-            }
-            if (config.style.pictureWeChatLeftBackStyle != 0) {
-                pictureLeftBack.setImageResource(config.style.pictureWeChatLeftBackStyle);
-            } else {
-                pictureLeftBack.setImageResource(R.drawable.picture_icon_back);
-            }
-            if (!TextUtils.isEmpty(config.style.pictureUnCompleteText)) {
-                mPictureSendView.setText(config.style.pictureUnCompleteText);
-            }
-        } else {
-            mPictureSendView.setBackgroundResource(R.drawable.picture_send_button_bg);
-            mPictureSendView.setTextColor(ContextCompat.getColor(getContext(), R.color.picture_color_white));
-            selectBarLayout.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.picture_color_half_grey));
-            check.setBackgroundResource(R.drawable.picture_wechat_select_cb);
-            pictureLeftBack.setImageResource(R.drawable.picture_icon_back);
-            mCbOriginal.setTextColor(ContextCompat
-                    .getColor(this, R.color.picture_color_white));
-            if (config.isOriginalControl) {
-                mCbOriginal.setButtonDrawable(ContextCompat
-                        .getDrawable(this, R.drawable.picture_original_wechat_checkbox));
-            }
-        }
 
         onSelectNumChange(false);
     }
@@ -244,11 +189,22 @@ public class PictureSelectorPreviewWeChatStyleActivity extends PicturePreviewAct
     }
 
     @Override
-    protected void onPageSelectedChange(LocalMedia media) {
-        super.onPageSelectedChange(media);
-        goneParent();
+    protected void onPageSelectedChange(int position,LocalMedia media) {
+        super.onPageSelectedChange(position,media);
         if (!config.previewEggs) {
             onChangeMediaStatus(media);
+            setSelectItem(media);
+        }
+    }
+
+    private void setSelectItem(LocalMedia media){
+        if (isSelected(media)){
+            mIsFireImage.setVisibility(View.VISIBLE);
+            mIsFireText.setVisibility(View.VISIBLE);
+            mIsFireImage.setSelected(media.isFire());
+        }else {
+            mIsFireText.setVisibility(View.INVISIBLE);
+            mIsFireImage.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -283,10 +239,6 @@ public class PictureSelectorPreviewWeChatStyleActivity extends PicturePreviewAct
 
     @Override
     protected void onSelectNumChange(boolean isRefresh) {
-        if (mPictureSendView == null) {
-            return;
-        }
-        goneParent();
         boolean enable = selectData.size() != 0;
         if (enable) {
             initCompleteText(selectData.size());
@@ -298,28 +250,14 @@ public class PictureSelectorPreviewWeChatStyleActivity extends PicturePreviewAct
                 // 重置一片内存区域 不然在其他地方添加也影响这里的数量
                 mGalleryAdapter.setNewData(selectData);
             }
-            if (config.style != null) {
-                if (config.style.pictureCompleteTextColor != 0) {
-                    mPictureSendView.setTextColor(config.style.pictureCompleteTextColor);
-                }
-                if (config.style.pictureCompleteBackgroundStyle != 0) {
-                    mPictureSendView.setBackgroundResource(config.style.pictureCompleteBackgroundStyle);
-                }
-            } else {
-                mPictureSendView.setTextColor(ContextCompat.getColor(getContext(), R.color.picture_color_white));
-                mPictureSendView.setBackgroundResource(R.drawable.picture_send_button_bg);
-            }
         } else {
-            if (config.style != null && !TextUtils.isEmpty(config.style.pictureUnCompleteText)) {
-                mPictureSendView.setText(config.style.pictureUnCompleteText);
-            } else {
-                mPictureSendView.setText(getString(R.string.picture_send));
-            }
             mRvGallery.animate().alpha(0).setDuration(ALPHA_DURATION).setInterpolator(new AccelerateInterpolator());
             mRvGallery.setVisibility(View.GONE);
             bottomLine.animate().alpha(0).setDuration(ALPHA_DURATION).setInterpolator(new AccelerateInterpolator());
             bottomLine.setVisibility(View.GONE);
         }
+        LocalMedia media = adapter.getItem(position);
+        setSelectItem(media);
     }
 
 
@@ -328,60 +266,6 @@ public class PictureSelectorPreviewWeChatStyleActivity extends PicturePreviewAct
      */
     @Override
     protected void initCompleteText(int startCount) {
-        boolean isNotEmptyStyle = config.style != null;
-        if (config.isWithVideoImage) {
-            // 混选模式
-            if (config.selectionMode == PictureConfig.SINGLE) {
-                if (startCount <= 0) {
-                    mPictureSendView.setText(isNotEmptyStyle && !TextUtils.isEmpty(config.style.pictureUnCompleteText)
-                            ? config.style.pictureUnCompleteText : getString(R.string.picture_send));
-                } else {
-                    boolean isCompleteReplaceNum = isNotEmptyStyle && config.style.isCompleteReplaceNum;
-                    if (isCompleteReplaceNum && !TextUtils.isEmpty(config.style.pictureCompleteText)) {
-                        mPictureSendView.setText(String.format(config.style.pictureCompleteText, selectData.size(), 1));
-                    } else {
-                        mPictureSendView.setText(isNotEmptyStyle && !TextUtils.isEmpty(config.style.pictureCompleteText)
-                                ? config.style.pictureCompleteText : getString(R.string.picture_send));
-                    }
-                }
-            } else {
-                boolean isCompleteReplaceNum = isNotEmptyStyle && config.style.isCompleteReplaceNum;
-                if (isCompleteReplaceNum && !TextUtils.isEmpty(config.style.pictureCompleteText)) {
-                    mPictureSendView.setText(String.format(config.style.pictureCompleteText,
-                            selectData.size(), config.maxSelectNum));
-                } else {
-                    mPictureSendView.setText(isNotEmptyStyle && !TextUtils.isEmpty(config.style.pictureUnCompleteText)
-                            ? config.style.pictureUnCompleteText : getString(R.string.picture_send_num, selectData.size(),
-                            config.maxSelectNum));
-                }
-            }
-        } else {
-            String mimeType = selectData.get(0).getMimeType();
-            int maxSize = PictureMimeType.isHasVideo(mimeType) && config.maxVideoSelectNum > 0 ? config.maxVideoSelectNum : config.maxSelectNum;
-            if (config.selectionMode == PictureConfig.SINGLE) {
-                if (startCount <= 0) {
-                    mPictureSendView.setText(isNotEmptyStyle && !TextUtils.isEmpty(config.style.pictureUnCompleteText)
-                            ? config.style.pictureUnCompleteText : getString(R.string.picture_send));
-                } else {
-                    boolean isCompleteReplaceNum = isNotEmptyStyle && config.style.isCompleteReplaceNum;
-                    if (isCompleteReplaceNum && !TextUtils.isEmpty(config.style.pictureCompleteText)) {
-                        mPictureSendView.setText(String.format(config.style.pictureCompleteText, selectData.size(),
-                                1));
-                    } else {
-                        mPictureSendView.setText(isNotEmptyStyle && !TextUtils.isEmpty(config.style.pictureCompleteText)
-                                ? config.style.pictureCompleteText : getString(R.string.picture_send));
-                    }
-                }
-            } else {
-                boolean isCompleteReplaceNum = isNotEmptyStyle && config.style.isCompleteReplaceNum;
-                if (isCompleteReplaceNum && !TextUtils.isEmpty(config.style.pictureCompleteText)) {
-                    mPictureSendView.setText(String.format(config.style.pictureCompleteText, selectData.size(), maxSize));
-                } else {
-                    mPictureSendView.setText(isNotEmptyStyle && !TextUtils.isEmpty(config.style.pictureUnCompleteText)
-                            ? config.style.pictureUnCompleteText
-                            : getString(R.string.picture_send_num, selectData.size(), maxSize));
-                }
-            }
-        }
+        mSelectNumText.setText("完成("+startCount+")");
     }
 }

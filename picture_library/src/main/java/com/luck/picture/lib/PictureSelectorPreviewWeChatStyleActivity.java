@@ -50,7 +50,7 @@ public class PictureSelectorPreviewWeChatStyleActivity extends PicturePreviewAct
         mSelectNumText = findViewById(R.id.select_complete);
         mIsFireImage = findViewById(R.id.is_fire_image);
         mIsFireText = findViewById(R.id.is_fire_text);
-        mTvPictureOk.setOnClickListener(this);
+        mSelectNumText.setOnClickListener(this);
 
         mCbOriginal.setTextSize(16);
         mGalleryAdapter = new PictureWeChatPreviewGalleryAdapter(config);

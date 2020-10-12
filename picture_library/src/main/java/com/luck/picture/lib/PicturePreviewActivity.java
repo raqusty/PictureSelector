@@ -346,7 +346,7 @@ public class PicturePreviewActivity extends PictureBaseActivity implements
                 mTvPictureOk.setText(config.style.pictureUnCompleteText);
             }
         }
-        titleViewBg.setBackgroundColor(colorPrimary);
+//        titleViewBg.setBackgroundColor(colorPrimary);
 
         if (config.isOriginalControl) {
             if (config.style != null) {

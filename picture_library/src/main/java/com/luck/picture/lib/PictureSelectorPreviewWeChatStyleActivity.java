@@ -198,7 +198,7 @@ public class PictureSelectorPreviewWeChatStyleActivity extends PicturePreviewAct
     }
 
     private void setSelectItem(LocalMedia media){
-        if (isSelected(media)){
+        if (isSelected(media)&& config.isFire){
             mIsFireImage.setVisibility(View.VISIBLE);
             mIsFireText.setVisibility(View.VISIBLE);
             mIsFireImage.setSelected(media.isFire());

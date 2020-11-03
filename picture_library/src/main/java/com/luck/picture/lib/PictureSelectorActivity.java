@@ -187,9 +187,10 @@ public class PictureSelectorActivity extends PictureBaseActivity implements View
         folderWindow = new FolderPopWindow(this, config);
         folderWindow.setArrowImageView(mIvArrow);
         folderWindow.setOnAlbumItemClickListener(this);
-        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(config.imageSpanCount,
+        int spanCount = config.imageSpanCount == 0 ? 4 : config.imageSpanCount;
+        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount,
                 ScreenUtils.dip2px(this, 2), false));
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), config.imageSpanCount));
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), spanCount));
         if (!config.isPageStrategy) {
             mRecyclerView.setHasFixedSize(true);
         } else {

@@ -1,4 +1,4 @@
-或者shapply plugin: 'com.android.library'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion cfgs.compileSdkVersion

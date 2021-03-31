@@ -102,10 +102,13 @@ public class PictureSelectorPreviewWeChatStyleActivity extends PicturePreviewAct
 
     private void setFireItem(){
         LocalMedia media = adapter.getItem(position);
-//        selectData.remove(media);
         boolean isFire = !media.isFire();
         media.setFire(isFire);
-
+        for (int i = 0;i<selectData.size();i++){
+            if (selectData.get(i).getId() == media.getId()){
+                selectData.get(i).setFire(isFire);
+            }
+        }
         mIsFireImage.setSelected(isFire);
     }
 

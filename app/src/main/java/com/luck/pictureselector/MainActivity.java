@@ -416,16 +416,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
-        @Override
-        public void onAddPicClick() {
-            boolean mode = cb_mode.isChecked();
-            if (mode) {
-                // 进入相册 以下是例子：不需要的api可以不写
+    private void selectOne(){
+//         进入相册 以下是例子：不需要的api可以不写
                 PictureSelector.create(MainActivity.this)
                         .openGallery(chooseMode)// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
                         .imageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
-                        .theme(themeId)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style v2.3.3后 建议使用setPictureStyle()动态方式
+                        .theme(R.style.picture_white_style)// 主题样式设置 具体参考 values/styles   用法：R.style.picture.white.style v2.3.3后 建议使用setPictureStyle()动态方式
                         .isWeChatStyle(isWeChatStyle)// 是否开启微信图片选择风格
                         .isFire(true)
                         .isUseCustomCamera(cb_custom_camera.isChecked())// 是否使用自定义相机
@@ -507,6 +503,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         //.videoQuality()// 视频录制质量 0 or 1
                         //.forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
                         .forResult(new MyResultCallback(mAdapter));
+    }
+
+    private void selectTwo(){
+        PictureSelector.create(MainActivity.this).openGallery(PictureMimeType.ofAll()).selectionMode(PictureConfig.MULTIPLE)
+                .maxSelectNum(6)
+                .minSelectNum(1)// 最小选择数量
+                .maxVideoSelectNum(1) // 视频最大选择数量
+                .isWithVideoImage(true)
+                .queryMaxFileSize(1)
+                .isFire(true)
+                .isWeChatStyle(true).setPictureStyle(mPictureParameterStyle).isCamera(false)
+                .theme(R.style.picture_white_style).imageEngine(GlideEngine.createGlideEngine())
+                .forResult(new MyResultCallback(mAdapter));
+    }
+
+    private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
+        @Override
+        public void onAddPicClick() {
+            boolean mode = cb_mode.isChecked();
+            if (mode) {
+                selectTwo();
+
             } else {
                 // 单独拍照
                 PictureSelector.create(MainActivity.this)

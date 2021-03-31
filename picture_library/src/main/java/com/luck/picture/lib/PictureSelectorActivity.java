@@ -812,6 +812,12 @@ public class PictureSelectorActivity extends PictureBaseActivity implements View
         LocalMedia image = result.size() > 0 ? result.get(0) : null;
         String mimeType = image != null ? image.getMimeType() : "";
         boolean isHasImage = PictureMimeType.isHasImage(mimeType);
+
+        if (config.filterFileSize != 0 && image.getSize() > config.filterFileSize * 1024 * 1024L ){
+            showPromptDialog(getString(R.string.picture_larger_than_m,(int)config.filterFileSize));
+            return;
+        }
+
         if (config.isWithVideoImage) {
             int videoSize = 0;
             int imageSize = 0;

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +25,6 @@ import com.luck.picture.lib.listener.OnPhotoSelectChangedListener;
 import com.luck.picture.lib.tools.AnimUtils;
 import com.luck.picture.lib.tools.DateUtils;
 import com.luck.picture.lib.tools.MediaUtils;
-import com.luck.picture.lib.tools.PictureFileUtils;
-import com.luck.picture.lib.tools.SdkVersionUtils;
 import com.luck.picture.lib.tools.StringUtils;
 import com.luck.picture.lib.tools.ToastUtils;
 import com.luck.picture.lib.tools.VoiceUtils;
@@ -443,6 +440,11 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
                 if (PictureMimeType.isHasVideo(media.getMimeType())) {
                     videoSize++;
                 }
+            }
+
+            if (config.filterFileSize != 0 && image.getSize() > config.filterFileSize * 1024 * 1024L ){
+                showPromptDialog(context.getString(R.string.picture_larger_than_m,(int)config.filterFileSize));
+                return;
             }
 
             if (PictureMimeType.isHasVideo(image.getMimeType())) {

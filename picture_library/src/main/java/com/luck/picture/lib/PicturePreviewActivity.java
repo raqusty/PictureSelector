@@ -600,6 +600,11 @@ public class PicturePreviewActivity extends PictureBaseActivity implements
                 ToastUtils.s(getContext(), PictureMimeType.s(getContext(), image.getMimeType()));
                 return;
             }
+            if (config.filterFileSize != 0 && image.getSize() > config.filterFileSize * 1024 * 1024L ){
+                showPromptDialog(getString(R.string.picture_larger_than_m,(int)config.filterFileSize));
+                return;
+            }
+
             String mimeType = selectData.size() > 0 ?
                     selectData.get(0).getMimeType() : "";
             int currentSize = selectData.size();

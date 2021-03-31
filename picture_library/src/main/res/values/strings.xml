@@ -60,4 +60,6 @@
     <string name="picture_go_setting">去设置</string>
     <string name="picture_know">我知道了</string>
     <string name="picture_data_null">这里空空如也…</string>
+    <string name="picture_larger_than_m">图片大于%1$dM,无法添加为动态表情</string>
+
 </resources>

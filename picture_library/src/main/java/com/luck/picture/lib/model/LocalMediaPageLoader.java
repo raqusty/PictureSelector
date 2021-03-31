@@ -312,21 +312,21 @@ public final class LocalMediaPageLoader {
                                 long bucket_id = data.getLong
                                         (data.getColumnIndexOrThrow(PROJECTION_PAGE[9]));
 
-                                if (config.filterFileSize > 0) {
-                                    if (size > config.filterFileSize * FILE_SIZE_UNIT) {
-                                        continue;
-                                    }
-                                }
+//                                if (config.filterFileSize > 0) {
+//                                    if (size > config.filterFileSize * FILE_SIZE_UNIT) {
+//                                        continue;
+//                                    }
+//                                }
 
                                 if (PictureMimeType.isHasVideo(mimeType)) {
-                                    if (config.videoMinSecond > 0 && duration < config.videoMinSecond) {
-                                        // If you set the minimum number of seconds of video to display
-                                        continue;
-                                    }
-                                    if (config.videoMaxSecond > 0 && duration > config.videoMaxSecond) {
-                                        // If you set the maximum number of seconds of video to display
-                                        continue;
-                                    }
+//                                    if (config.videoMinSecond > 0 && duration < config.videoMinSecond) {
+//                                        // If you set the minimum number of seconds of video to display
+//                                        continue;
+//                                    }
+//                                    if (config.videoMaxSecond > 0 && duration > config.videoMaxSecond) {
+//                                        // If you set the maximum number of seconds of video to display
+//                                        continue;
+//                                    }
                                     if (duration == 0) {
                                         //If the length is 0, the corrupted video is processed and filtered out
                                         continue;
@@ -679,13 +679,13 @@ public final class LocalMediaPageLoader {
      * @return
      */
     private String getDurationCondition(long exMaxLimit, long exMinLimit) {
-        long maxS = config.videoMaxSecond == 0 ? Long.MAX_VALUE : config.videoMaxSecond;
+        long maxS = Long.MAX_VALUE;
         if (exMaxLimit != 0) {
             maxS = Math.min(maxS, exMaxLimit);
         }
         return String.format(Locale.CHINA, "%d <%s " + MediaStore.MediaColumns.DURATION + " and " + MediaStore.MediaColumns.DURATION + " <= %d",
-                Math.max(exMinLimit, config.videoMinSecond),
-                Math.max(exMinLimit, config.videoMinSecond) == 0 ? "" : "=",
+                Math.max(exMinLimit, 0),
+                Math.max(exMinLimit, 0) == 0 ? "" : "=",
                 maxS);
     }
 

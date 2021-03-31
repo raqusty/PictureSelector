@@ -174,7 +174,6 @@ public class GridImageAdapter extends
                 // 原图
                 path = media.getPath();
             }
-
             Log.i(TAG, "原图地址::" + media.getPath());
 
             if (media.isCut()) {

@@ -813,7 +813,7 @@ public class PictureSelectorActivity extends PictureBaseActivity implements View
         String mimeType = image != null ? image.getMimeType() : "";
         boolean isHasImage = PictureMimeType.isHasImage(mimeType);
 
-        if (config.filterFileSize != 0 && image.getSize() > config.filterFileSize * 1024 * 1024L ){
+        if (config.filterFileSize > 0 && image.getSize() > config.filterFileSize * 1024 * 1024L ){
             showPromptDialog(getString(R.string.picture_larger_than_m,(int)config.filterFileSize));
             return;
         }

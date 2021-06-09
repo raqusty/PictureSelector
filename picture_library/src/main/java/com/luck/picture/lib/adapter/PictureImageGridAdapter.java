@@ -442,7 +442,7 @@ public class PictureImageGridAdapter extends RecyclerView.Adapter<RecyclerView.V
                 }
             }
 
-            if (config.filterFileSize != 0 && image.getSize() > config.filterFileSize * 1024 * 1024L ){
+            if (config.filterFileSize > 0 && image.getSize() > config.filterFileSize * 1024 * 1024L ){
                 showPromptDialog(context.getString(R.string.picture_larger_than_m,(int)config.filterFileSize));
                 return;
             }
